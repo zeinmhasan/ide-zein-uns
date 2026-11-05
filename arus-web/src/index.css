@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Kelas warna yang dibentuk dinamis dari token (tone) */
+@source inline("{bg,text,fill,stroke,border,decoration}-{teal,amber,coral,olive,slate}");
+@source inline("{bg,border,fill}-{teal,amber,coral,olive,slate}/{8,10,12,15,20,25,30,40,60}");
+
+:root {
+  --paper: #f6f2ea;
+  --paper-2: #efe9dd;
+  --card: #fbf9f4;
+  --ink: #1e2328;
+  --ink-soft: #5b6168;
+  --grid: #e3ddd1;
+  --line: #d9d1c2;
+  --teal: #0f6e66;
+  --amber: #e59a1c;
+  --coral: #d2553a;
+  --olive: #6b8e23;
+  --slate: #4a5a6a;
+  --on-accent: #ffffff;
+  --on-amber: #2a1d03;
+  color-scheme: light;
+}
+
+.dark {
+  --paper: #14181c;
+  --paper-2: #191e23;
+  --card: #1c2228;
+  --ink: #ece7dd;
+  --ink-soft: #a5abb1;
+  --grid: #222930;
+  --line: #2e363e;
+  --teal: #2fa99d;
+  --amber: #f2b24c;
+  --coral: #e9775d;
+  --olive: #93b843;
+  --slate: #8d9eb0;
+  --on-accent: #0f1316;
+  --on-amber: #1a1203;
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-card: var(--card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-grid: var(--grid);
+  --color-line: var(--line);
+  --color-teal: var(--teal);
+  --color-amber: var(--amber);
+  --color-coral: var(--coral);
+  --color-olive: var(--olive);
+  --color-slate: var(--slate);
+  --color-on-accent: var(--on-accent);
+  --color-on-amber: var(--on-amber);
+  --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--teal) 25%, transparent);
+}
+
+.blueprint {
+  background-color: var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  background-position: -1px -1px;
+}
+
+.badge-asumsi {
+  background: repeating-linear-gradient(-45deg, #f6d873, #f6d873 5px, #efc94a 5px, #efc94a 10px);
+  color: #3a2e05;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 22px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+}
+input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: var(--line);
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -6px;
+  border-radius: 999px;
+  background: var(--thumb, var(--teal));
+  border: 3px solid var(--card);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 25%, transparent);
+}
+input[type="range"]::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--thumb, var(--teal));
+  border: 3px solid var(--card);
+  box-shadow: 0 0 0 1px color-mix(in oklab, var(--ink) 25%, transparent);
+}
+input[type="range"]:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes scan {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(46px);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+.animate-blink {
+  animation: blink 1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
